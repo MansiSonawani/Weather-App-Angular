@@ -1,29 +1,37 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
+  lat!: number;
+  lon!: number;
+  city: string | undefined;
+  country: string | undefined;
+  API_KEY = '5d176a44e85298c2003d266d9bdabc30';
   
-url = 'https://api.openweathermap.org/data/2.5/weather';
-apikey='459d7ab5fab85c9b3ce557236603f3eb';
 
    constructor(private http: HttpClient) { }
+   getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lon = position.coords.longitude;
+        this.getWeather();
+      });
+    } else {
+      // Geolocation is not supported by this browser.
+    }
+  }
 
 
-  getWeatherDataByCoords(lat: string | number | boolean,lon: string | number | boolean,name : undefined){
-  
-    let params = new HttpParams()
-      .set('lat', lat)
-      .set('lon', lon)
-      .set('name', 'name')
-      .set('units','imperial')
-      .set('api_is', this.apikey)
-  
-
-  
-
-  return this.http.get(this.url, { params });
+  getWeather(){
+    this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${this.API_KEY}`)
+    .subscribe((data: any) => {
+      this.city = data.name;
+      this.country = data.sys.country;
+    });
 }
 }
+  

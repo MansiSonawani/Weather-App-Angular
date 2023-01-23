@@ -1,8 +1,11 @@
-<div class="row">
-  <div class="col-md-6 offset-md-3">
-    <div class="col-sm-12 text-center">
-        <h5>Current weather forcast in your city..</h5>
-        <h2>Weather in {{ weather }}</h2>
-    </div>
-  </div>  
+<div>
+  <button (click)="getLocation()">Get Location</button>
+  <p>Latitude: {{ lat }}</p>
+  <p>Longitude: {{ lon }}</p>
+</div>
+
+<div>
+  <button (click)="getLocation()">Get Location</button>
+  <p>City: {{ city }}</p>
+  <p>Country: {{ country }}</p>
 </div>

@@ -13,29 +13,30 @@ export class TodayComponent  {
   lon: number | undefined;
   name : undefined;
   weather!: Object;
-  constructor(private weatherService : WeatherService)
+  city: any;
+  country: any;
+
+  
   {
 
-
-  }
-   
-  ngOnInit(): void  {
-      this.getLocation();
-      console.warn("get your location");
-
-  }
+  export class AppComponent {
+    latitude: number;
+    longitude: number;
+    city: string;
+    country: string;
+    API_KEY = '5d176a44e85298c2003d266d9bdabc30';
+  
+    constructor(){}
+  
 getLocation(){
-  if("geolocation" in navigator){
-    navigator.geolocation.watchPosition((success) => {
-      this.lat = success.coords.latitude;
-      this.lon = success.coords.longitude;
-      this.weatherService.getWeatherDataByCoords(this.lat, this.lon, this.name).subscribe(data =>{
-        this.weather = data;
-      });
-
-
-    })
-    
+  
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.latitude = position.coords.latitude;
+      this.longitude = position.coords.longitude;
+    });
+  } else {
+    // Geolocation is not supported by this browser.
   }
 }
 }
