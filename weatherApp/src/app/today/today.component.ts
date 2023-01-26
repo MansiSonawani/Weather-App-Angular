@@ -17,9 +17,9 @@ export class TodayComponent  {
   country: any;
 
   
-  {
+  {}
 
-  export class AppComponent {
+  export class TodayComponent {
     latitude: number;
     longitude: number;
     city: string;
