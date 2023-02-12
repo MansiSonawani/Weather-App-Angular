@@ -4,6 +4,7 @@ import { Observable, observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { weatherData } from '../models/weather.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
